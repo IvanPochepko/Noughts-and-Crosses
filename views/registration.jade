@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title #{title}
+        link(rel='stylesheet', href='/css/bootstrap.css')
+        link(rel='stylesheet', href='/css/style.css')
+    body
+        .container
+            .row
+                .col-md-4.col-md-offset-4
+                    form.form-block(action='/registration', method='post')
+                        .form-group
+                            label(for='userName') Choose your login
+                            input#userName.form-control(
+                                name='login'
+                                type='text'
+                                placeholder='Login'
+                            )
+                        .form-group
+                            label(for='userPassword') Choose your password
+                            input#userPassword.form-control(
+                                name='password'
+                                type='password'
+                                placeholder='Password'
+                            )
+                        button.btn.btn-primary(type='submit') Register me!
+                        .success_send_msg

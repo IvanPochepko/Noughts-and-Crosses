@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title #{title}
+        link(rel='stylesheet', href='/css/bootstrap.css')
+        link(rel='stylesheet', href='/css/style.css')
+    body
+        .container
+            .row
+                .col-md-4.col-md-offset-4
+                    form.form-block(
+                        action='/auth'
+                        method='post'
+                        )
+                        .form-group
+                            label(for='login') Login:
+                            input.form-control(
+                                name='login'
+                                type='text'
+                                placeholder='Enter your login'
+                            )
+                        .form-group
+                            label(for='password') Password:
+                            input.form-control(
+                                name='password'
+                                type='password'
+                                placeholder='Password'
+                            )
+                        button.btn.btn-primary(type='submit') Login

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+            <div class="col-md-4 col-md-offset-4">
+                <form action="/registration" method="post" class="form-block">
+                    <div class="form-group">
+                        <label for="userName">Choose your login</label>
+                        <input name="login" class="form-control" type="text" id="userName" placeholder="Login"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">Password</label>
+                        <input name="password" class="form-control"  type="password" id="userPassword" placeholder="Password"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register me!</button><div class="success_send_msg"></div>
+                </form>
+            </div>
+
+    </div>
+</div>
+</body>
+</html>

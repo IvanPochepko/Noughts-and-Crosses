@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <form action="/auth" method="post" class="form-block">
+                    <div class="form-group">
+                        <label for="login">Login:</label>
+                        <input name="login" type="text" class="form-control" placeholder="Enter you login"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input name="password" type="password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
