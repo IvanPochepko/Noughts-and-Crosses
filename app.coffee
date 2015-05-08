@@ -1,3 +1,4 @@
+# author Andrew Safonov (e-mail: safonovandrew@gmail.com)
 express = require 'express'
 path = require 'path'
 favicon = require 'serve-favicon'
