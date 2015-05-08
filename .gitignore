@@ -1,2 +1,5 @@
 node_modules
 app1.js
+.idea/
+.idea
+.idea/*
