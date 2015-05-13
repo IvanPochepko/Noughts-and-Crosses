@@ -24,7 +24,7 @@ router.get '/:id', auth.auth, (req, res) ->
         .populate('player1 player2', 'login')
         .populate('chat')
         .exec (err, game) ->
-            game.populate {path: 'chat.user', model: 'User'}, (err, game) ->
+            game.populate {path: 'chat.user', model: 'User', select: 'login'}, (err, game) ->
                 console.log 'Created game: ', game
                 res.render 'games',
                     title: 'Main Page'
@@ -37,7 +37,9 @@ router.get '/:id/json', auth.auth, (req, res) ->
     id = req.params.id
     Game.findById id
     .populate('player1 player2 winner', 'login')
+    .populate('chat')
     .exec (err, game)->
+        game.populate {path: 'chat.user', model: 'User', select: 'login'}
         console.log 'Created game: ', game
         winner = game.winner
         console.log 'Winner: ', winner
