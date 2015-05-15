@@ -10,7 +10,10 @@ html(lang='en')
         script(src='/js/underscore-min.js')
         script(src='/js/script.js')
         script(src="/socket.io/socket.io.js")
-    body
+        script(src='/js/angular.min.js')
+        script(src='/js/angular-route.js')
+        script(src='/js/controller.js')
+    body(ng-app='my-app')
         #header.container-fluid
             .row
                 .col-md-4
@@ -20,7 +23,7 @@ html(lang='en')
                     .place_login
                         | Hello,
                         a(href='') #{user.login}
-        .container
+        .container(ng-controller='myController')
             .row
                 .col-md-9
                     h3
@@ -43,21 +46,21 @@ html(lang='en')
                     .row
                         .col-md-12
                             .chat
-                                ul#style-2.list-unstyled.messages-box
-                                    if (game.chat)
-                                        - each message in game.chat
-                                            li
-                                                span.users #{message.user.login}
-                                                    | :&nbsp;
-                                                span #{message.text}
-                                    else
-                                        li No messages
+                                ul#style-2.list-unstyled.messages-box(
+                                    chat-scroll
+                                    flag="flag"
+                                )
+                                    li(ng-repeat='message in chat')
+                                        span.users {{ message.user.login }}
+                                            | :&nbsp;
+                                        span {{ message.text }}
                                 input#user_message.form-control(
                                     type='text'
                                     name='userMsg'
+                                    ng-model='newMessage'
                                     )
                                 br
-                                button#send_msg.btn.btn-primary(type='button') Send message
+                                button#send_msg.btn.btn-primary(type='button', ng-click='sendMessage()') Send message
         #win_modal.modal.fade
             .modal-dialog
                 .modal-content

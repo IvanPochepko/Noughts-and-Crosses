@@ -7,13 +7,13 @@ var yourTurn = false;
 var winner = '';
 
 $(document).ready(function(){
-    var socket = io.connect('http://localhost:3000')
+    socket = io.connect('http://localhost:3000')
     init(function(game){
         socket.emit('subscribe', {game: game._id})
     })
 
     $('.deskpole').on('click', function(){
-        console.log('click')
+        //console.log('click')
         winnerCheck(winner)
         if(userRole == 'guest') return;
         var id = $(this).attr('id');
@@ -25,36 +25,16 @@ $(document).ready(function(){
             winnerCheck(winner)
         });
     })
-    $('#send_msg').on('click', function(){
-        var userMessage = $('#user_message').val()
-        if(!userMessage) return
-        var message = {message: userMessage}
-        console.log(message)
-        sendMessage(message, function(){
-            console.log('http success')
-            $('#user_message').val('')
-        })
-    })
-
-    socket.on('chatMessage', function(message){
-        console.log('socket.io: new message', message)
-        var li = $('<li>'),
-            author = $('<span>').addClass('users').text(message.user.login+': '),
-            mess = $('<span>').text(message.text)
-        li.append(author)
-        li.append(mess)
-        $('.messages-box').append(li)
-    })
 
     socket.on('gameTurn', function(data){
-        console.log('make turn: ', data)
+        //console.log('make turn: ', data)
         //yourTurn = data.yourTurn;
-        console.log (yourTurn)
+        //console.log (yourTurn)
         game.turns = game.turns.concat(data.turn);
-        console.log('game turns: ', game.turns)
+        //console.log('game turns: ', game.turns)
         var figure = data.turn
         yourTurn = data.whoseTurn == userRole
-        console.log('figure: ', figure)
+        //console.log('figure: ', figure)
         renderTurn(figure);
         winnerCheck(data.winner);
     })
@@ -62,7 +42,7 @@ $(document).ready(function(){
 
 function init(cb){
     $.get(location.pathname+'/json', function(data){
-        console.log(data)
+        //console.log(data)
         game = data.game;
         yourTurn = data.yourTurn;
         winner = data.winner;
@@ -106,12 +86,7 @@ function doTurn(figureData, cb){
         cb(newTurn);
     })
 }
-function sendMessage(message, cb){
-    console.log('start sendMessage function')
-    $.post(location.pathname+'/addmessage', message, function (data){
-        cb();
-    })
-}
+
 function winnerCheck(winner){
     if(!winner) return;
     if(!winner.login && game.turns.length >= 9) {

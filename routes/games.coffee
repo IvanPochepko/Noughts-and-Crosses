@@ -24,7 +24,7 @@ router.get '/:id', auth.auth, (req, res) ->
         .populate('player1 player2', 'login')
         .populate('chat')
         .exec (err, game) ->
-            game.populate {path: 'chat.user', model: 'User'}, (err, game) ->
+            game.populate {path: 'chat.user', model: 'User', select: 'login'}, (err, game) ->
                 console.log 'Created game: ', game
                 res.render 'games',
                     title: 'Main Page'
@@ -37,20 +37,24 @@ router.get '/:id/json', auth.auth, (req, res) ->
     id = req.params.id
     Game.findById id
     .populate('player1 player2 winner', 'login')
+    .populate('chat')
     .exec (err, game)->
-        console.log 'Created game: ', game
-        winner = game.winner
-        console.log 'Winner: ', winner
-        lastMove = _.last game.turns
-        firstPlayerMove = not lastMove || lastMove.type == 'nought'
-        console.log req.user._id, game.player1._id.toString(), typeof req.user._id
-        yourTurn = firstPlayerMove && req.user._id.toString() == game.player1._id.toString() ||
-        not firstPlayerMove && req.user._id.toString() == game.player2._id.toString()
-        res.send
-            game: game
-            user: req.user
-            yourTurn: yourTurn
-            winner: winner
+        game.populate {path: 'chat.user', model: 'User', select: 'login'}, (err, game) ->
+            console.log 'Created game: ', game
+            winner = game.winner
+            console.log 'Winner: ', winner
+            lastMove = _.last game.turns
+            firstPlayerMove = not lastMove || lastMove.type == 'nought'
+            console.log req.user._id, game.player1._id.toString(), typeof req.user._id
+            yourTurn = firstPlayerMove && req.user._id.toString() == game.player1._id.toString() ||
+            not firstPlayerMove && req.user._id.toString() == game.player2._id.toString()
+            user = _.clone req.user
+            user.setValue 'password', "You'll not see it"
+            res.send
+                game: game
+                user: user
+                yourTurn: yourTurn
+                winner: winner
 
 router.post '/:id/addmessage', auth.auth401, (req, res) ->
     io = getIo()

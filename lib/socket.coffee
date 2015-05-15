@@ -9,4 +9,4 @@ exports.boot = (server) ->
             console.log 'subscription request', data
             socket.join data.game
 
-exports.getIo = () -> io;
+exports.getIo = () -> io
