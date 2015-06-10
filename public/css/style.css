@@ -19,33 +19,34 @@
 .font18 {
     font-size: 18px;
 }
- #header {
-     background: #d43f3a;
-     color: #ffffff;
- }
- .place_login {
-     padding-top: 25px;
-     font-weight: 600;
- }
- .place_login > a {
-     color: #ffffff;
- }
- .custom_list {
-     margin: 20px 0px;
-
- }
- .my_well {
-     margin: 20px 0px;
-     padding: 10px 15px;
-     border: solid #999 2px;
-     border-radius: 7px;
-     text-align: center;
-     /*color: #D43F3A;*/
- }
- .img-center {
-     margin-left: auto;
-     margin-right: auto;
- }
+#header {
+    background: #d43f3a;
+    color: #ffffff;
+}
+.user-bar {
+    line-height: 70px;
+    vertical-align: middle;
+    font-weight: 600;
+}
+.user-bar > a.nickname {
+    color: #ffffff;
+}
+.user-bar > .divider {padding: 0 0px;}
+.custom_list {
+    margin: 20px 0px;
+}
+.my_well {
+    margin: 20px 0px;
+    padding: 10px 15px;
+    border: solid #999 2px;
+    border-radius: 7px;
+    text-align: center;
+    /*color: #D43F3A;*/
+}
+.img-center {
+    margin-left: auto;
+    margin-right: auto;
+}
 .desk {
     border: 3px solid #843534;
     border-radius: 10px;
@@ -55,19 +56,19 @@
     height: 195px;
     padding: 50px;
 }
-.deskpole:nth-child(3n+2){
+.deskpole:nth-child(3n+2) {
     border-left: solid 2px #d43f3a;
     border-right: solid 2px #d43f3a;
 }
-.deskpole:nth-child(4){
+.deskpole:nth-child(4) {
     border-top: solid 2px #d43f3a;
     border-bottom: solid 2px #d43f3a;
 }
-.deskpole:nth-child(5){
+.deskpole:nth-child(5) {
     border-top: solid 2px #d43f3a;
     border-bottom: solid 2px #d43f3a;
 }
-.deskpole:nth-child(6){
+.deskpole:nth-child(6) {
     border-top: solid 2px #d43f3a;
     border-bottom: solid 2px #d43f3a;
 }
@@ -78,28 +79,24 @@
     border: solid #999 2px;
     border-radius: 7px;
     font-size: 16px;
-
 }
 .messages-box {
     max-height: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
-#style-2::-webkit-scrollbar-track
-{
+#style-2::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
 }
 
-#style-2::-webkit-scrollbar
-{
+#style-2::-webkit-scrollbar {
     width: 12px;
     background-color: #F5F5F5;
 }
 
-#style-2::-webkit-scrollbar-thumb
-{
+#style-2::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #D62929;

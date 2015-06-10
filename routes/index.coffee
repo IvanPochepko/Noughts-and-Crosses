@@ -4,22 +4,14 @@ router = express.Router()
 {User, Game} = require('../lib/db').models
 auth = require '../lib/auth'
 
+# templates route
+router.get '/partials/:template', (req, res) ->
+    template = req.params.template
+    res.render 'partials/' + template
 # GET home page. #
 router.get '/', auth.auth, (req, res, next) ->
-# get other users list
-    User.find
-        _id:
-            $ne: req.user._id.toString()
-    , (err, gamers) ->
-        Game.find(status: $ne: 'completed')
-        .populate('player1 player2')
-        .exec (err, games)->
-            #console.log 'Games with not "completed" status: ', games
-            res.render 'index',
-                title: 'Main Page'
-                user: req.user
-                gamers: gamers
-                oldGames: games
+    res.render 'index',
+        title: 'Appchestra Games'
 
 router.get '/registration', (req, res) ->
     res.render 'registration',
@@ -30,17 +22,18 @@ router.get '/login', (req, res, next) ->
 router.post '/registration', (req, res) ->
     login= req.body.login
     password = req.body.password
-    #console.log 'login: ', login, 'password: ', password
-    if(not login || not password)
-        console.log 'Empty data!'
-        res.status(400).send 'What a Shit!'
+    if (not login || not password)
+        res.status(400).send 'Bad data, sorry!'
         return false
     User.register req.body, (err, doc) ->
-        res.send doc
+        res.redirect '/login'
 
 router.post '/auth',
     passport.authenticate 'auth',
         successRedirect: '/'
         failureRedirect: '/login'
 
+router.get '/logout', auth.auth, (req, res) ->
+    req.logout()
+    res.redirect '/login'
 module.exports = router;

@@ -1,0 +1,61 @@
+#header.container-fluid
+    .container
+        .row
+            .col-md-4
+                h1: b AppChestraGames
+            .col-md-6.pull-right.text-right
+                .user-bar
+                    span Hello,&nbsp;
+                    a.btn.btn-link(href='').nickname {{user.login}}
+                    span.divider &nbsp;|&nbsp;
+                    a.btn.btn-link(href="/logout") Logout
+.container()
+    .row
+        .col-md-9
+            h3
+                b.red {{game.player1.login}}
+                span &nbsp;vs&nbsp;
+                b.red {{game.player2.login}}
+            .row.text-center.desk
+                .col-md-4.deskpole(ng-repeat="field in gameFields", ng-click="makeTurn(field)")
+                    img(ng-if="field.type", ng-src="/img/{{field.type}}.jpg")
+        .col-md-3.pull-right
+            h4
+                b Game chat
+            .row
+                .col-md-12
+                    .chat
+                        ul#style-2.list-unstyled.messages-box(
+                            chat-scroll
+                            flag="flag"
+                        )
+                            li(ng-repeat='message in chat')
+                                span.users {{ message.user.login }}
+                                    | :&nbsp;
+                                span {{ message.text }}
+                        input#user_message.form-control(
+                            type='text'
+                            name='userMsg'
+                            ng-model='newMessage'
+                            ng-keypress="sendMessage($event)"
+                            )
+                        br
+                        button#send_msg.btn.btn-primary(type='button', ng-click='sendMessage()') Send message
+#win_modal.modal.fade(my-modal="my-modal", show="showWinner")
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(
+                    type='button'
+                    data-dismiss='modal'
+                    aria-label='Close'
+                    )
+                        span(aria-hidden='true') &times;
+                h4.modal-title Game over
+            .modal-body
+                h3._winner {{winText}}
+            .modal-footer
+                button.btn.btn-default(
+                    type='button'
+                    data-dismiss='modal'
+                    ) Close

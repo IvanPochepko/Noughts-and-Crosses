@@ -1,0 +1,51 @@
+#header.container-fluid
+    .container
+        .row
+            .col-md-4
+                h1: b AppChestraGames
+            .col-md-6.pull-right.text-right
+                .user-bar
+                    span Hello,&nbsp;
+                    a.btn.btn-link(href='').nickname {{user.login}}
+                    span.divider &nbsp;|&nbsp;
+                    a.btn.btn-link(href="/logout") Logout
+.container
+    .row
+        .col-md-6
+            .my_well
+                .row
+                    .col-md-12
+                        img.img-center(src='/img/noughts-crosses.jpg', alt='noughts-crosses')
+                .row
+                    .col-md-12
+                        button.btn.btn-primary.btn-block.btn-lg(
+                            data-toggle='modal'
+                            data-target='#choose_player'
+                        ) Play
+        .col-md-3.pull-right
+            .h4.custom_list Gamers list
+            ul
+                li(ng-repeat="player in players") {{player.login}}
+            .h4.custom_list Unfinished games
+            ol
+                li(ng-repeat="game in games")
+                    a(ng-href="/games/{{game._id}}")
+                        | {{game.player1.login}}
+                        | vs
+                        | {{game.player2.login}} &nbsp;
+                    span.label.text-capitalize.label-success {{game.status}}
+#choose_player.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog.modal-sm
+        .modal-content
+            .modal-header
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times
+                h4#myModalLabel.modal-title Chose another player
+            form(method='get', ng-submit="createGame()")
+                .modal-body
+                    .radio(ng-repeat="player in players")
+                        label
+                            input(type='radio', name='player', ng-model="newGame.player2", ng-value="player._id")
+                            | {{player.login}}
+                .modal-footer
+                    button.btn.btn-primary(type='submit') Send invite

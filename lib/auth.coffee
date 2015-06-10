@@ -12,22 +12,16 @@ exports.init = ->
             done(err, user)
 # Define auth strategy
 passport.use 'auth', new localStrategy
-# redefine usernameField for our login form
+    # redefine usernameField
     usernameField: 'login'
     , (login, password, done) ->
-        #console.log 'Enter passport.localStrategy'
         # Call auth function
         User.authenticate login, password, done
-        #console.log 'auth completed'
 
-# middleware check if user logged in
+# AUTH check middleware
 module.exports.auth = (req, res, next) ->
-    if req.user
-        next()
-    # if not, redirect to login page
-    else res.redirect '/login'
+    return res.redirect '/login' unless req.user
+    next()
 module.exports.auth401 = (req, res, next) ->
-    if req.user
-        next()
-# if not, redirect to login page
-    else res.sendStatus 401
+    return res.sendStatus 401 unless req.user
+    next()
